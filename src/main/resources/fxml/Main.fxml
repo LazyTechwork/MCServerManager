@@ -4,41 +4,58 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="888.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lazytechwork.mcsm.MainController">
+<AnchorPane prefHeight="577.0" prefWidth="552.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lazytechwork.mcsm.MainController">
     <children>
-        <Label layoutX="111.0" layoutY="41.0" text="Minecraft Server Manager" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="41.0">
-            <font>
-                <Font name="Arial Bold" size="27.0" />
-            </font>
-        </Label>
-        <TextField fx:id="jarPath" editable="false" layoutX="40.0" layoutY="127.0" prefHeight="32.0" prefWidth="331.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="127.0">
+        <TextField fx:id="jarPath" editable="false" layoutX="40.0" layoutY="170.0" prefHeight="32.0" prefWidth="368.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="170.0">
             <font>
                 <Font name="Arial" size="16.0" />
             </font>
         </TextField>
-        <Button fx:id="jarChoose" layoutX="389.0" layoutY="127.0" mnemonicParsing="false" onAction="#jarChoose" prefHeight="32.0" prefWidth="81.0" text="Открыть">
+        <Button fx:id="jarChoose" layoutX="431.0" layoutY="170.0" mnemonicParsing="false" onAction="#jarChoose" prefHeight="32.0" prefWidth="81.0" style="-fx-background-color: #44f; -fx-text-fill: #fff;" text="Открыть" AnchorPane.rightAnchor="40.0">
             <font>
                 <Font name="Arial Bold" size="12.0" />
             </font>
         </Button>
-      <Slider fx:id="ramSlider" blockIncrement="1.0" layoutX="40.0" layoutY="211.0" majorTickUnit="1.0" max="16.0" min="1.0" minorTickCount="0" prefHeight="14.0" prefWidth="331.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
-      <Label layoutX="40.0" layoutY="99.0" prefHeight="17.0" prefWidth="331.0" text="Выбор файла сервера">
+      <Slider fx:id="ramSlider" blockIncrement="1.0" layoutX="40.0" layoutY="254.0" majorTickUnit="1.0" max="16.0" min="1.0" minorTickCount="0" prefHeight="38.0" prefWidth="368.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
+      <Label layoutX="40.0" layoutY="142.0" prefHeight="20.0" prefWidth="368.0" text="Выбор файла сервера">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="40.0" layoutY="176.0" prefHeight="20.0" prefWidth="344.0" text="Максимальное количество выделяемой памяти (GB)">
+      <Label layoutX="40.0" layoutY="219.0" prefHeight="20.0" prefWidth="368.0" text="Максимальное количество выделяемой памяти (GB)">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="ramVal" layoutX="389.0" layoutY="218.0" prefHeight="25.0" prefWidth="135.0" text="1024MB">
+      <Label fx:id="ramVal" layoutX="431.0" layoutY="261.0" prefHeight="25.0" prefWidth="81.0" text="1024MB" AnchorPane.rightAnchor="40.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="330.0" layoutY="774.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <image>
+            <Image url="@../img/tekly.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="40.0" layoutY="330.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="220.0" style="-fx-background-color: #44f; -fx-text-fill: #fff;" text="Запустить сервер" AnchorPane.leftAnchor="40.0">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="292.0" layoutY="330.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="220.0" style="-fx-text-fill: #fff; -fx-background-color: #f44;" text="Остановить сервер" AnchorPane.rightAnchor="40.0">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="153.0" fitWidth="368.0" layoutX="92.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="92.0" AnchorPane.rightAnchor="92.0" AnchorPane.topAnchor="10.0">
+         <image>
+            <Image url="@../img/minecraft.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
