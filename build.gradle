@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'com.lazytechwork.mcsm'
+version '1.0.0-BETA'
+
+mainClassName = 'com.lazytechwork.mcsm.Launcher'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'log4j:log4j:1.2.17'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    manifest.attributes("Main-Class": mainClassName)
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "1.12"
+}
