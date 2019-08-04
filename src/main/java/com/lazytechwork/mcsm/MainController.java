@@ -48,9 +48,32 @@ public class MainController {
         try {
             ProcessBuilder pb = new ProcessBuilder("java", "-Xmx" + Math.round(ramSlider.getValue() * 1024) + "M", "-jar", jarPath.getText(), "nogui");
             pb.directory(new File(jarPath.getText()).getParentFile());
-            serverProcess = pb.start();
+            LOG.info("Set working directory: " + pb.directory().getAbsolutePath());
+            LOG.info("Checking is EULA signed");
+            File eula = new File(new File(jarPath.getText()).getParentFile().getAbsolutePath() + "/eula.txt");
+            if (!eula.exists()) {
+                LOG.info("EULA doesn't exists, creating..");
+                eula.createNewFile();
+                BufferedWriter writer = new BufferedWriter(new FileWriter(eula));
+                writer.write("eula=true");
+                writer.close();
+            } else {
+                LOG.info("EULA file found");
+                BufferedReader reader = new BufferedReader(new FileReader(eula));
+                String line;
+                boolean signed = false;
+                while ((line = reader.readLine()) != null) {
+                    if (line.toLowerCase().equals("eula=true".toLowerCase())) signed = true;
+                }
+                if (!signed) {
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(eula, false));
+                    writer.write("eula=true");
+                    writer.close();
+                }
+                reader.close();
+            }
             LOG.info("Starting MC Server with cmd: " + String.join(" ", pb.command()));
-            LOG.info("Set WDIR: " + pb.directory().getAbsolutePath());
+            serverProcess = pb.start();
         } catch (IOException e) {
             LOG.error("There is PIZDEC!", e);
             return;

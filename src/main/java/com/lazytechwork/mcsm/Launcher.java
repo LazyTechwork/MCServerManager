@@ -19,6 +19,7 @@ public class Launcher extends Application {
         LOG.info("Starting app...");
         primaryStage.setTitle("Minecraft Server Manager");
         primaryStage.setResizable(true);
+        primaryStage.setMaximized(true);
         try {
             primaryStage.setScene(CoreUtils.loadFXML("Main"));
             primaryStage.setMinWidth(primaryStage.getScene().getWidth());
