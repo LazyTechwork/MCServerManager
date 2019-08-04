@@ -64,12 +64,12 @@
                 <Font name="Arial" size="14.0" />
             </font>
         </Label>
-        <TextArea fx:id="console" editable="false" layoutX="562.0" layoutY="84.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="534.0" promptText="Здесь вы увидите логи сервера" AnchorPane.bottomAnchor="153.0" AnchorPane.leftAnchor="562.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="84.0">
+        <TextArea fx:id="console" editable="false" layoutX="562.0" layoutY="84.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="534.0" promptText="Здесь вы увидите логи сервера" style="-fx-control-inner-background: #000; -fx-text-fill: #0f0; -fx-prompt-text-fill: #0f0;" AnchorPane.bottomAnchor="153.0" AnchorPane.leftAnchor="562.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="84.0">
             <font>
-                <Font name="Arial" size="14.0" />
+                <Font name="Monospaced Regular" size="14.0" />
             </font>
         </TextArea>
-        <TextField layoutX="593.0" layoutY="423.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="471.0" promptText="Введите команду" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="593.0" AnchorPane.rightAnchor="75.0">
+        <TextField layoutX="593.0" layoutY="423.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="471.0" promptText="Введите команду" AnchorPane.bottomAnchor="123.0" AnchorPane.leftAnchor="593.0" AnchorPane.rightAnchor="75.0">
             <font>
                 <Font size="14.0" />
             </font>
