@@ -9,7 +9,8 @@ public class CoreUtils {
 
     public static Scene loadFXML(String filename) throws IOException {
         FXMLLoader loader = new FXMLLoader(Launcher.class.getResource("/fxml/" + filename + ".fxml"));
-        return new Scene(loader.load());
+        Scene scene = new Scene(loader.load());
+        return scene;
     }
 
 }

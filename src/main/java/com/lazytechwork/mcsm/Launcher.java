@@ -21,6 +21,8 @@ public class Launcher extends Application {
         primaryStage.setResizable(true);
         try {
             primaryStage.setScene(CoreUtils.loadFXML("Main"));
+            primaryStage.setMinWidth(primaryStage.getScene().getWidth());
+            primaryStage.setMinHeight(primaryStage.getScene().getHeight());
         } catch (IOException e) {
             LOG.error("Error while loading FXML", e);
         }
