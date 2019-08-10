@@ -1,6 +1,6 @@
 package com.lazytechwork.mcsm;
 
-import javafx.event.ActionEvent;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
@@ -20,18 +20,47 @@ public class MainController {
     private Label ramVal;
     @FXML
     private TextArea console;
+    @FXML
+    private TextField cmdField;
+    @FXML
+    private Button sendButton;
+    @FXML
+    private Button stopButton;
+    @FXML
+    private Button startButton;
 
     private static Process serverProcess;
     private static Thread consoleReader;
     private static Logger LOG = Logger.getLogger(MainController.class);
+    private static BufferedWriter consoleWriter;
+    private static boolean waitingForClose = false;
 
     public void initialize() {
         ramSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             ramVal.setText(((int) newValue.floatValue() * 1024) + "MB");
         });
+        setControl(false);
+        Platform.runLater(() -> {
+            ramSlider.getScene().getWindow().setOnCloseRequest(e -> {
+                LOG.info("Starting closing procedure");
+                cmdField.setDisable(true);
+                sendButton.setDisable(true);
+                startButton.setDisable(true);
+                ramSlider.setDisable(true);
+                jarPath.setDisable(true);
+                jarChoose.setDisable(true);
+                stopButton.setDisable(true);
+                LOG.info("Checking is server started");
+                if (serverProcess != null) {
+                    LOG.info("Server online, stopping...");
+                    stopServer();
+                    Platform.setImplicitExit(true);
+                }
+            });
+        });
     }
 
-    public void jarChoose(ActionEvent actionEvent) {
+    public void jarChoose() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JAR files (*.jar)", "*.jar"));
         File file = fileChooser.showOpenDialog(jarChoose.getScene().getWindow());
@@ -40,7 +69,7 @@ public class MainController {
         }
     }
 
-    public void startServer(ActionEvent actionEvent) {
+    public void startServer() {
         LOG.info("Got signal to start server. Checking is server path correct..");
         if (jarPath.getText().isEmpty() && !new File(jarPath.getText()).exists()) return;
         LOG.info("Checking is server already started");
@@ -80,10 +109,12 @@ public class MainController {
         }
         consoleReader = new Thread(() -> {
             console.setText("");
+            consoleWriter = new BufferedWriter(new OutputStreamWriter(serverProcess.getOutputStream()));
             try (BufferedReader serverConsole = new BufferedReader(new InputStreamReader(serverProcess.getInputStream()));) {
                 String line;
                 while ((line = serverConsole.readLine()) != null) {
-                    console.appendText(line + "\n");
+                    String finalLine = line;
+                    Platform.runLater(() -> console.appendText(finalLine + "\n"));
                 }
             } catch (IOException e) {
                 LOG.error("Error while reading console", e);
@@ -91,18 +122,52 @@ public class MainController {
         });
         consoleReader.setDaemon(true);
         consoleReader.start();
+        setControl(true);
     }
 
-    public void stopServer(ActionEvent actionEvent) {
-        if (serverProcess == null) return;
-        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(serverProcess.getOutputStream()))) {
-            writer.write("stop");
-            writer.flush();
+    public void sendCommandToServer(String cmd) {
+        if (serverProcess == null || consoleWriter == null || cmd.isEmpty()) return;
+        try {
+            consoleWriter.write(cmd);
+            consoleWriter.newLine();
+            consoleWriter.flush();
         } catch (IOException e) {
             LOG.error("Error while writing to console", e);
         }
+    }
+
+    public void stopServer() {
+        sendCommandToServer("stop");
         LOG.info("Detaching process and terminating console reader");
         serverProcess = null;
+        try {
+            consoleWriter.close();
+        } catch (IOException e) {
+            LOG.error("Error while closing console writer", e);
+        }
         consoleReader.interrupt();
+        setControl(false);
+    }
+
+    public void setControl(boolean state) {
+        cmdField.setDisable(!state);
+        sendButton.setDisable(!state);
+        startButton.setDisable(state);
+        ramSlider.setDisable(state);
+        jarPath.setDisable(state);
+        jarChoose.setDisable(state);
+        stopButton.setDisable(!state);
+    }
+
+    public void sendCmd() {
+        if (serverProcess == null) return;
+        if (cmdField.getText().isEmpty()) return;
+        sendCommandToServer(cmdField.getText());
+        LOG.info("Command sent: " + cmdField.getText());
+        cmdField.setText("");
+    }
+
+    public void clearConsole() {
+        console.setText("");
     }
 }

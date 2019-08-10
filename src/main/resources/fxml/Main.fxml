@@ -44,12 +44,12 @@
                 <Image url="@../img/tekly.png" />
             </image>
         </ImageView>
-        <Button layoutX="40.0" layoutY="330.0" mnemonicParsing="false" onAction="#startServer" prefHeight="38.0" prefWidth="220.0" style="-fx-background-color: #44f; -fx-text-fill: #fff;" text="Запустить сервер" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="330.0">
+        <Button fx:id="startButton" layoutX="40.0" layoutY="330.0" mnemonicParsing="false" onAction="#startServer" prefHeight="38.0" prefWidth="220.0" style="-fx-background-color: #44f; -fx-text-fill: #fff;" text="Запустить сервер" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="330.0">
             <font>
                 <Font name="Arial Bold" size="14.0" />
             </font>
         </Button>
-        <Button layoutX="292.0" layoutY="330.0" mnemonicParsing="false" onAction="#stopServer" prefHeight="38.0" prefWidth="220.0" style="-fx-text-fill: #fff; -fx-background-color: #f44;" text="Остановить сервер" AnchorPane.leftAnchor="292.0" AnchorPane.topAnchor="330.0">
+        <Button fx:id="stopButton" layoutX="292.0" layoutY="330.0" mnemonicParsing="false" onAction="#stopServer" prefHeight="38.0" prefWidth="220.0" style="-fx-text-fill: #fff; -fx-background-color: #f44;" text="Остановить сервер" AnchorPane.leftAnchor="292.0" AnchorPane.topAnchor="330.0">
             <font>
                 <Font name="Arial Bold" size="14.0" />
             </font>
@@ -64,17 +64,17 @@
                 <Font name="Arial" size="14.0" />
             </font>
         </Label>
-        <TextArea fx:id="console" editable="false" layoutX="562.0" layoutY="84.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="534.0" promptText="Здесь вы увидите логи сервера" style="-fx-control-inner-background: #000; -fx-text-fill: #0f0; -fx-prompt-text-fill: #0f0;" AnchorPane.bottomAnchor="153.0" AnchorPane.leftAnchor="562.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="84.0">
+        <TextArea fx:id="console" editable="false" layoutX="562.0" layoutY="84.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="534.0" promptText="Здесь вы увидите логи сервера" style="-fx-control-inner-background: #000; -fx-text-fill: #0f0; -fx-prompt-text-fill: #0f0;" wrapText="true" AnchorPane.bottomAnchor="153.0" AnchorPane.leftAnchor="562.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="84.0">
             <font>
                 <Font name="Monospaced Regular" size="14.0" />
             </font>
         </TextArea>
-        <TextField layoutX="593.0" layoutY="423.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="471.0" promptText="Введите команду" AnchorPane.bottomAnchor="123.0" AnchorPane.leftAnchor="593.0" AnchorPane.rightAnchor="75.0">
+        <TextField fx:id="cmdField" layoutX="593.0" layoutY="423.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#sendCmd" prefHeight="31.0" prefWidth="471.0" promptText="Введите команду" AnchorPane.bottomAnchor="123.0" AnchorPane.leftAnchor="593.0" AnchorPane.rightAnchor="75.0">
             <font>
                 <Font size="14.0" />
             </font>
         </TextField>
-        <Button layoutX="1064.0" layoutY="423.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" style="-fx-background-color: #44f;" AnchorPane.bottomAnchor="124.0" AnchorPane.rightAnchor="43.0">
+        <Button fx:id="sendButton" layoutX="1064.0" layoutY="423.0" mnemonicParsing="false" onAction="#sendCmd" prefHeight="30.0" prefWidth="32.0" style="-fx-background-color: #44f;" AnchorPane.bottomAnchor="124.0" AnchorPane.rightAnchor="43.0">
             <font>
                 <Font size="14.0" />
             </font>
@@ -82,7 +82,7 @@
                 <FontAwesomeIcon fill="WHITE" glyphName="ARROW_RIGHT" layoutX="972.0" layoutY="447.0" />
             </graphic>
         </Button>
-        <Button layoutX="562.0" layoutY="423.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" style="-fx-background-color: #f44;" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="562.0">
+        <Button layoutX="562.0" layoutY="423.0" mnemonicParsing="false" onAction="#clearConsole" prefHeight="30.0" prefWidth="31.0" style="-fx-background-color: #f44;" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="562.0">
             <font>
                 <Font size="14.0" />
             </font>

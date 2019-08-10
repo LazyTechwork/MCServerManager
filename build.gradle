@@ -7,6 +7,7 @@ group 'com.lazytechwork.mcsm'
 version '1.0.0-BETA'
 
 mainClassName = 'com.lazytechwork.mcsm.Launcher'
+version = '1.0-BETA'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -22,7 +23,14 @@ dependencies {
 }
 
 jar {
-    manifest.attributes("Main-Class": mainClassName)
+    manifest {
+        attributes 'Main-Class': mainClassName
+        attributes 'Implementation-Vendor': 'Tekly Technologies, Inc.'
+        attributes 'Implementation-Version': version
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 
 task wrapper(type: Wrapper) {
